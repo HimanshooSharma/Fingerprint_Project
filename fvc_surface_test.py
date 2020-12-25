@@ -23,7 +23,7 @@ BackgroundFilePathList = glob.glob('bg/*.jpg')
 # for ImageFilePath in glob.glob('in/*.jpg'):
 for ImageFilePath in glob.glob('fvc_in/*.tif'):
     img = None
-    used_orientation = {}
+    used_orientation = set()
     for k in range(5):
         if k > 0:
             if backgroundIndex < len(BackgroundFilePathList):
