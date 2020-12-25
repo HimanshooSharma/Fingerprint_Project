@@ -17,13 +17,13 @@ out = 1
 bg = 0
 #bg1 = len(bgfiles)
 backgroundIndex = 0
-angles = np.array(range(30, 271))
+angles = np.array(range(30, 271,7))
 BackgroundFilePathList = glob.glob('bg/*.jpg')
 
 # for ImageFilePath in glob.glob('in/*.jpg'):
 for ImageFilePath in glob.glob('fvc_in/*.tif'):
     img = None
-    
+    used_orientation = {}
     for k in range(5):
         if k > 0:
             if backgroundIndex < len(BackgroundFilePathList):
@@ -39,6 +39,13 @@ for ImageFilePath in glob.glob('fvc_in/*.tif'):
             img = ImageEnhance.Contrast(img)
             img = img.enhance(1.6)
             angle = random.choice(angles)
+            while  True:
+                if angle in used_orientation:
+                    angle = random.choice(angles)
+                else:
+                    used_orientation.add(angle)
+                    break
+            
             img = img.rotate(angle, expand=True)
             # background.show()
             # quit()
